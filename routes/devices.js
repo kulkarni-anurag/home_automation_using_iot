@@ -17,4 +17,13 @@ router.post('/add', (req,res) => {
         .catch((err) => res.status(400).json("Error: "+err));
 })
 
+router.post('/update/:id', (req,res) => {
+    Devices.updateOne(
+      { id: req.params.id},
+      { dstatus: req.body.status}
+    )
+      .then(() => res.json("Device Status Updated"))
+      .catch((err) => res.status(400).json("Error: "+err));
+})
+
 module.exports = router;
