@@ -4,14 +4,14 @@ const Devices = require('../models/devices_model');
 
 router.get('/', (req,res) => {
     Devices.find()
-        .then((devices) => res.json(devices))
-        .catch((err) => res.status(400).json("Error: "+err));
+      .then((devices) => res.json(devices))
+      .catch((err) => res.status(400).json("Error: "+err));
 })
 
 router.get('/:id', (req,res) => {
     Devices.findOne({ _id: req.params.id })
-	.then((device) => res.json(device))
-	.catch((err) => res.status(400).json("Error: "+err));
+	    .then((device) => res.json(device.dstatus))
+	    .catch((err) => res.status(400).json("Error: "+err));
 })
 
 router.post('/add', (req,res) => {
@@ -26,9 +26,15 @@ router.post('/add', (req,res) => {
 router.post('/update/:id', (req,res) => {
     Devices.updateOne(
       { _id: req.params.id},
-      { dstatus: Number(req.body.status)}
+      { dstatus: Number(req.body.status) }
     )
       .then(() => res.json("Device Status Updated"))
+      .catch((err) => res.status(400).json("Error: "+err));
+})
+
+router.delete('/:id', (req,res) => {
+    Devices.deleteOne({ _id: req.params.id })
+      .then(() => res.json("Device Deleted"))
       .catch((err) => res.status(400).json("Error: "+err));
 })
 
