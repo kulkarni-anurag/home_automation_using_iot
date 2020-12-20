@@ -12,6 +12,10 @@ app.use(express.json());
 
 app.set('view engine', 'ejs');
 
+app.get('/', (req,res) => {
+	res.render('index');
+});
+
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
   useNewUrlParser: true,
