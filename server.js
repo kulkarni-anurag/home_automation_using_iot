@@ -18,11 +18,10 @@ app.get('/', (req,res) => {
   res.render('index');
 });
 
-app.post('/request', (req,res) => {
+app.post('/', (req,res) => {
     const state = Number(req.body.state);
-    io.emit('state',state);
-    res.json("state is: "+state);
-    console.log("State is: "+state);
+    res.json(state);
+    console.log(state);
 });
 
 server.listen(port, () => {
