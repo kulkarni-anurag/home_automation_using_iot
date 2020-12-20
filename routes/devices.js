@@ -20,7 +20,7 @@ router.post('/add', (req,res) => {
 router.post('/update/:id', (req,res) => {
     Devices.updateOne(
       { id: req.params.id},
-      { dstatus: req.body.status}
+      { dstatus: Number(req.body.status)}
     )
       .then(() => res.json("Device Status Updated"))
       .catch((err) => res.status(400).json("Error: "+err));
