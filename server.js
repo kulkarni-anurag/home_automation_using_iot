@@ -18,10 +18,21 @@ app.get('/', (req,res) => {
   res.render('index');
 });
 
-app.post('/', (req,res) => {
-    const state = Number(req.body.state);
+io.on('connection', function (socket) {
+
+  console.log('user connected');
+
+  socket.on('disconnect', function () {
+    console.log('user disconnected');
+  });
+  
+  app.post('/request', (req,res) => {
+	const state = Number(req.body.state);
     res.json(state);
+	io.emit('state', state);
     console.log(state);
+  });
+  
 });
 
 server.listen(port, () => {
