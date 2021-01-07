@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Devices = require('../models/devices_model');
 
+router.get('/index', (req,res) => {
+    res.render('devices');
+})
+
 router.get('/', (req,res) => {
     Devices.find()
       .then((devices) => res.json(devices))
