@@ -19,7 +19,7 @@
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     
     <script>
-      $(document).ready(function(){
+      $(window).on('load', function(){
         $.get('http://35.239.81.207:8080/devices/5fdf87331c1c193b3f41d448', function(data,status){
           if(data != 0){
             $("#chk1").prop('checked', true).change();  
@@ -43,6 +43,9 @@
             }
           }
         });
+      });
+      
+      $(document).ready(function(){
         $("#chk1").change(function(){
           var state = 0;
           status = $(this).prop('checked');
